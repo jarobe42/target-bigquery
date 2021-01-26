@@ -1,3 +1,5 @@
+import pytest
+import simplejson
 import singer
 
 from target_bigquery.schema import build_schema, prioritize_one_data_type_from_multiple_ones_in_anyOf, convert_field_type
@@ -12,10 +14,10 @@ from tests.rsc.input_json_schemas import *
 from tests.utils import convert_list_of_schema_fielts_to_list_of_lists
 
 
-class TestStream(unittestcore.BaseUnitTest):
+class TestSchemaConversion(unittestcore.BaseUnitTest):
 
     def setUp(self):
-        super(TestStream, self).setUp()
+        super(TestSchemaConversion, self).setUp()
 
     def test_flat_schema(self):
 
@@ -278,12 +280,4 @@ class TestStream(unittestcore.BaseUnitTest):
             assert schema_built_new_method_sorted == schema_built_old_method_sorted
 
             # TODO: check data types
-
-
-
-
-
-
-
-
 
