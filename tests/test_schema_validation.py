@@ -60,7 +60,11 @@ class TestSchemaValidation(unittestcore.BaseUnitTest):
 
                 msg = singer.parse_message(invalid_schema_name)
 
-                with pytest.raises(ValueError, match=error_message):
+                with pytest.raises(ValueError, match=error_message) as e:
                     validate_schema_completeness(msg.schema)
+
+                error_message = e.value
+
+                print(error_message,'\n')
 
 
