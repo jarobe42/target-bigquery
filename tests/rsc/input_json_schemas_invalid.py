@@ -1538,3 +1538,443 @@ invalid_schema_under_anyOf_deep_nested_empty_type = """{
     "Id"
   ]
 }"""
+
+
+
+invalid_schema_anyOf_discount_codes_empty_type = """{
+    "type": "SCHEMA",
+    "stream": "nested_stream",
+    "schema": {
+        "properties": {
+
+            "discount_codes": {
+                "anyOf": [
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "amount": {
+                                    "type": [
+                                    ]
+                                },
+                                "code": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "type": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "null"
+                    }
+                ]
+            }
+
+        },
+        "type": [
+            "null",
+            "object"
+        ]
+    },
+    "key_properties": [
+        "campaign_id",
+        "adset_id",
+        "ad_id",
+        "date_start",
+        "age",
+        "gender"
+    ],
+    "bookmark_properties": [
+        "date_start"
+    ]
+}"""
+
+
+invalid_schema_anyOf_tax_lines_empty_type = """{
+  "type": "SCHEMA",
+  "stream": "nested_stream",
+  "schema": {
+    "properties": {
+
+      "tax_lines": {
+        "anyOf": [
+          {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "code": {
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "price": {
+                  "type": [
+                    "null",
+                    "number"
+                  ]
+                },
+                "title": {
+                  "type": [
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+
+
+
+    },
+    "type": [
+      "null",
+      "object"
+    ]
+  },
+  "key_properties": [
+    "campaign_id",
+    "adset_id",
+    "ad_id",
+    "date_start",
+    "age",
+    "gender"
+  ],
+  "bookmark_properties": [
+    "date_start"
+  ]
+}"""
+
+
+# can't parse this one
+invalid_schema_anyOf_line_items_empty_props = """{
+    "type": "SCHEMA",
+    "stream": "nested_stream",
+    "schema": {
+        "properties": {
+
+            "line_items": {
+                "anyOf": [
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "grams": {
+                                    "type": [
+                                        "null",
+                                        "integer"
+                                    ]
+                                },
+                                "images": {
+                                    "type": [
+                                        "null",
+                                        "object"
+                                    ],
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "large": {
+                                            "type": [
+                                                "null",
+                                                "string"
+                                            ]
+                                        },
+                                        "medium": {
+                                            "type": [
+                                                "null",
+                                                "string"
+                                            ]
+                                        },
+                                        "original": {
+                                            "type": [
+                                                "null",
+                                                "string"
+                                            ]
+                                        },
+                                        "small": {
+                                            "type": [
+                                                "null",
+                                                "string"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "price": {
+                                    "type": [
+                                        "null",
+                                        "number"
+                                    ],
+                                    "multipleOf": 1e-08
+                                },
+                                "properties": {
+                                    "anyOf": [
+                                        {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    
+                                                   
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ]
+                                },
+                                "quantity": {
+                                    "type": [
+                                        "null",
+                                        "integer"
+                                    ]
+                                },
+                                "shopify_product_id": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "shopify_variant_id": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "sku": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "subscription_id": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "title": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "variant_title": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "vendor": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "null"
+                    }
+                ]
+            }
+        },
+        "type": [
+            "null",
+            "object"
+        ]
+    },
+    "key_properties": [
+        "campaign_id",
+        "adset_id",
+        "ad_id",
+        "date_start",
+        "age",
+        "gender"
+    ],
+    "bookmark_properties": [
+        "date_start"
+    ]
+}"""
+
+
+
+invalid_schema_anyOf_line_items_empty_type = """{
+    "type": "SCHEMA",
+    "stream": "nested_stream",
+    "schema": {
+        "properties": {
+
+            "line_items": {
+                "anyOf": [
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "grams": {
+                                    "type": [
+                                        "null",
+                                        "integer"
+                                    ]
+                                },
+                                "images": {
+                                    "type": [
+                                        "null",
+                                        "object"
+                                    ],
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "large": {
+                                            "type": [
+                                                "null",
+                                                "string"
+                                            ]
+                                        },
+                                        "medium": {
+                                            "type": [
+                                                "null",
+                                                "string"
+                                            ]
+                                        },
+                                        "original": {
+                                            "type": [
+                                                "null",
+                                                "string"
+                                            ]
+                                        },
+                                        "small": {
+                                            "type": [
+                                                "null",
+                                                "string"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "price": {
+                                    "type": [
+                                        "null",
+                                        "number"
+                                    ],
+                                    "multipleOf": 1e-08
+                                },
+                                "properties": {
+                                    "anyOf": [
+                                        {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "name": {
+                                                        "type": [
+                                                            "null",
+                                                            "string"
+                                                        ]
+                                                    },
+                                                    "value": {
+                                                        "type": [
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "null"
+                                        }
+                                    ]
+                                },
+                                "quantity": {
+                                    "type": [
+                                        "null",
+                                        "integer"
+                                    ]
+                                },
+                                "shopify_product_id": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "shopify_variant_id": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "sku": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "subscription_id": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "title": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "variant_title": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                },
+                                "vendor": {
+                                    "type": [
+                                        "null",
+                                        "string"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "null"
+                    }
+                ]
+            }
+        },
+        "type": [
+            "null",
+            "object"
+        ]
+    },
+    "key_properties": [
+        "campaign_id",
+        "adset_id",
+        "ad_id",
+        "date_start",
+        "age",
+        "gender"
+    ],
+    "bookmark_properties": [
+        "date_start"
+    ]
+}"""
+

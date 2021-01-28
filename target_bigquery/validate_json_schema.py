@@ -1,40 +1,19 @@
-# TODO: simplify this ugly solution. Improve recursion and iteration
+import re
 
-def validate_field(field_property):
+def validate_json_schema_completeness(schema_input_as_string):
+    """
+    :param schema_input_as_string: JSON schema formatted as string
 
-    if 'type' in field_property:
+    if schema has empty "properties", "type" or "items", fail schema completeness validation check
+    """
 
-        if field_property['type'] == []:
-            raise ValueError(f'JSON schema of property {field_property} has empty type')
+    schema_input_no_spaces = re.sub(' |\n', '', schema_input_as_string)
 
-    if 'properties' in field_property:
+    completeness_validation_dict = {"properties": re.compile(r'\"properties\"\:\{\}'),
+                                    "type": re.compile(r'\"type\"\:\[\]'),
+                                    "items": re.compile(r'\"items\"\:\{\}')}
 
-        if field_property['properties'] == {}:
-            raise ValueError(f'JSON schema of property {field_property} has empty properties')
+    for schema_element, pattern_not_valid in completeness_validation_dict.items():
 
-    if 'items' in field_property:
-
-        if 'anyOf' in field_property['items']:
-
-            for i in field_property['items']['anyOf']:
-                validate_field(i)
-
-    if 'anyOf' in field_property:
-
-        for i in field_property['anyOf']:
-
-            validate_field(i)
-
-    if ("items" in field_property and "properties" in field_property["items"]) or (
-            "properties" in field_property) or ("anyOf" in field_property):
-
-        for subfield_name, subfield_property in field_property.get("properties", field_property.get("items", {}).get(
-                "properties")).items():
-
-            validate_field(subfield_property)
-
-
-def validate_schema_completeness(schema):
-
-    for field_name, field_property in schema.get("properties", schema.get("items", {}).get("properties")).items():
-        validate_field(field_property)
+        if pattern_not_valid.search(schema_input_no_spaces):
+            raise ValueError("JSON schema has missing {}".format(schema_element))
