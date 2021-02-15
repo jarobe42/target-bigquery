@@ -148,11 +148,16 @@ class LoadJobProcessHandler(BaseProcessHandler):
                 loaded_tmp_tables.append((stream, tmp_table_name))
 
             # copy tables to production tables
-            copy_config = CopyJobConfig()
-            copy_config.write_disposition = WriteDisposition.WRITE_APPEND
-
             for stream, tmp_table_name in loaded_tmp_tables:
                 self.logger.info(f"Copy {tmp_table_name} to {self.tables[stream]}")
+
+                truncate = self.truncate if stream not in self.partially_loaded_streams else False
+                
+                copy_config = CopyJobConfig()
+                if truncate:
+                    copy_config.write_disposition = WriteDisposition.WRITE_TRUNCATE
+                else:
+                    copy_config.write_disposition = WriteDisposition.WRITE_APPEND
 
                 self.client.copy_table(
                     sources=self.dataset.table(tmp_table_name),
